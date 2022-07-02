@@ -6,9 +6,9 @@ The repository includes background codes and six example script files which demo
 
 The script files are the following:
 
-1. "Script_number_noerror" implements estimation for cell number data nder the statistical model (5) from Section 4.2 of the accompanying paper with E_(i,l)^(num) = 0, i.e. no measurement error term.
+1. "Script_number" implements estimation for cell number data nder the statistical model (5) from Section 4.2 of the accompanying paper with E_(i,l)^(num) = 0, i.e. no measurement error term.
 
-2. "Script_number_noerror_reducible" implements estimation for cell number data nder the statistical model (5) from Section 4.2 of the accompanying paper with E_(i,l)^(num) = 0, i.e. no measurement error term, for a model with reducible switching dynamics. See Appendix B of the paper.
+2. "Script_number_reducible" implements estimation for cell number data nder the statistical model (5) from Section 4.2 of the accompanying paper with E_(i,l)^(num) = 0, i.e. no measurement error term, for a model with reducible switching dynamics. See Appendix B of the paper.
 
 3. "Script_fractional_Model_II" implements estimation for cell fraction data nder Model II from Section 8 of the accompanying paper.
 
