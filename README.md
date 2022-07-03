@@ -1,6 +1,6 @@
 # Statistical inference of the rates of cell proliferation and phenotypic switching in cancer
 
-This repository holds MATLAB codes for implementation of the estimation framework introduced in the paper "Statistical inference of the rates of cell proliferation and phenotypic switching in cancer" by Gunnarsson, Leder and Foo.
+This repository holds MATLAB codes which implement the estimation framework introduced in the paper "Statistical inference of the rates of cell proliferation and phenotypic switching in cancer" by Gunnarsson, Leder and Foo.
 
 The repository includes background codes and six example script files which demonstrate how the framework can be used. To run the script files, they must be saved in the same folder as the background codes. 
 
