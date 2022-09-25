@@ -1,13 +1,14 @@
 %% Background information
 
 % This is a script which generates parameter regimes and artificial data as
-% described in Appendix D of the accompanying paper. It then implements
-% estimation under the statistical model (11) of Section 5.2 of the
-% accompanying paper with E_(i,l)^(frac) = 0, i.e. no measurement error.
+% described in Appendix "Generation of artificial data" of the accompanying
+% paper. It then implements estimation under the statistical model from
+% Section "Estimation for cell fraction data" of the accompanying paper
+% with E_(i,l)^(frac) = 0, i.e. no measurement error.
 
 % In the script, the parameters of the branching process model from Section
-% 2 of the accompanying paper are arranged in a K x (K+1) matrix as
-% follows:
+% "Multitype branching process" of the accompanying paper are arranged in a
+% K x (K+1) matrix as follows:
 
 % 1. The first column holds the death rates of the phenotypes, i.e. entry
 % (k,1) is the death rate d_k of the k-th phenotype.
@@ -19,9 +20,6 @@
 % 3. The remaining columns hold the switching rates. The k-th row from the
 % third column and onwards holds the switching rates from type-k to type-m
 % in ascending order of m.
-
-% See Section 2 of the accompanying paper for a presentation of the
-% branching process model and the notation used.
 
 % As an example, consider the following parameter matrix for a three-type
 % model:
@@ -44,26 +42,27 @@
 
 % params_true_frac is a K x (K+1) x nregimes tensor, which holds the true
 % parameters for the artificial data. The true parameters are generated as
-% described in Appendix D of the accompanying paper. Arrangement of
-% parameters is as described above.
+% described in Appendix "Generation of artificial data" of the accompanying
+% paper. Arrangement of parameters is as described above.
 
 % data_frac is an I x K x L x R x nregimes x niter tensor which holds
 % the artificial data.
 
 % params_simple_frac is a K x (K+1) x nregimes x niter tensor, which holds
 % simple deterministic estimates for the model parameters, obtained by
-% solving the least squares problem in expression (21) of Appendix C of the
-% accompanying paper.
+% solving the least squares problem presented in Appendix "Implementation
+% in MATLAB" of the accompanying paper.
  
 % params_mle_frac is a K x (K+1) x nregimes x niter tensor, which holds the
-% estimates for the model parameters under the statistical model (11) of
-% Section 5.2, with no measurement error term.
+% estimates for the model parameters under the statistical model from
+% Section "Estimation for cell fraction data" of the accompanying paper,
+% with no measurement error term.
 
 % cvs_frac is a K x (K+1) x nregimes x 2 tensor. cvs_frac(i,j,n,1) holds the
 % coefficient of variation (CV) for the simple deterministic estimates of
 % parameter (i,j) under parameter regime n. cvs_frac(i,j,n,2)
 % holds the CV for the estimates of parameter (i,j) under the statistical
-% model (11) of Section 4.2.
+% model from Section "Estimation for cell fraction data".
 
 %% Input parameters
 
@@ -88,14 +87,15 @@ nregimes = 2;
 niter = 10;
 
 % If time_lapse = 0, the data is generated as endpoint data. If timelapse =
-% 1, the data is generated as sequential data. See Section 3 of the
-% accompanying paper.
+% 1, the data is generated as sequential data. See Section "Expmeriments
+% and data" of the accompanying paper.
 time_lapse = 0;
 
 % C_frac is a cell array, where C_frac{i} is a (K-1) x J_i matrix which
 % allows the user to reduce the experimental data under the i-th initial
 % condition. This option can be useful for reducible switching dynamics.
-% See Appendices B and C in the accompanying paper.
+% See Appendices "Estimation for reducible switching dynamics" and
+% "Implementation in MATLAB" of the accompanying paper.
 C_frac = cell(I);
 for i=1:I
     C_frac{i} = eye(K-1,K-1);
@@ -141,12 +141,13 @@ beq_frac = [];
 % guess based on simple deterministic parameter estimates. Here, the user
 % is given the option to request that the optimization problem is solved
 % for multiple initial guesses, each based on the simple deterministic
-% estimates. See Appendix C of the accompanying paper.
+% estimates. See Appendix "Implementation in MATLAB" of the accompanying
+% paper.
 nopt_simple_mle = 0;
 % Here, the user is given the option to request that the MLE optimization
 % problem for is solved for multiple initial guesses, where the initial
-% guesses are chosen in a random fashion as described in Appendix D of the
-% accompanying paper.
+% guesses are chosen in a random fashion as described in Appendix
+% "Generation of artificial data" of the accompanying paper.
 nopt_random_mle = 0;
 
 %% Setup of data structures
