@@ -2,13 +2,16 @@
 
 % This is a script for cell fraction data with measurement error.
 
-% The script implements estimation under Model I of Section 8 of
-% the accompanying paper on a publicly available cell dataset from Wang et
-% al. (2014). It produces numerical results displayed in Section 8.
+% The script implements estimation under Model I of Section "Application:
+% Transition between stem and non-stem cell states in SW620 colon cancer"
+% of the accompanying paper on a publicly available cell fraction dataset
+% from Yang et al. (2012). It produces numerical results displayed in
+% Section "Application: Transition between stem and non-stem cell states in
+% SW620 colon cancer."
 
 % In the script, the parameters of the branching process model from Section
-% 2 of the accompanying paper are arranged in a K x (K+1) matrix as
-% follows:
+% "Multitype branching process model" of the accompanying paper are
+% arranged in a K x (K+1) matrix as follows:
 
 % 1. The first column holds the death rates of the phenotypes, i.e. entry
 % (k,1) is the death rate d_k of the k-th phenotype.
@@ -42,11 +45,11 @@
 
 % params_simple_frac is a K x (K+1) matrix which holds simple deterministic
 % estimates for the model parameters, obtained by solving the least squares
-% problem in expression (21) of Appendix C of the accompanying paper.
-% Arrangement of parameters is as described above.
+% problem presented in Appendix "Implementation in MATLAB" of the
+% accompanying paper. Arrangement of parameters is as described above.
 
 % params_mle_frac is a K x (K+1) matrix which holds the estimates for
-% the model parameters under the stochastic Model I.
+% the model parameters under Model I.
 
 % If confidence intervals are requested, ci_frac is a 2 x K x (K+1)
 % tensor, where for each i = 1,...,K and j = 1,...,K+1, ci_frac(:,i,j)
@@ -79,7 +82,7 @@ L = size(T,2);
 % Entry number (i,k,l,r) is the fraction of cells of type-k in the r-th
 % replicate of the experiment started by the i-th initial condition and
 % ended at the l-th timepoint.
-% Here, we have manually entered the data from Wang et al. (2014).
+% Here, we have manually entered the data from Yang et al. (2012).
 data_frac = zeros(I,K,L,R);
 data_frac(1,1,:,1) = [0.8350,0.7868,0.7323,0.7150,0.6940,0.7055,0.7140,0.7135,0.7345,0.7123,0.6788,0.6567];
 data_frac(1,2,:,1) = 1-data_frac(1,1,:,1);
@@ -99,7 +102,8 @@ N = Ntot'.*alpha;
 % C_frac is a cell array, where C_frac{i} is a (K-1) x J_i matrix which
 % allows the user to reduce the experimental data under the i-th initial
 % condition. This option can be useful for reducible switching dynamics.
-% See Appendices B and C of the accompanying paper.
+% See Appendices "Estimation for reducible switching dynamics" and
+% "Implementation in MATLAB" of the accompanying paper.
 C_frac = cell(I);
 for i=1:I
     C_frac{i} = eye(K-1,K-1);
@@ -151,12 +155,13 @@ x0_frac_def = [];
 % guess based on simple deterministic parameter estimates. Here, the user
 % is given the option to request that the optimization problem is solved
 % for multiple initial guesses, each based on the simple deterministic
-% estimates. See Appendix C of the accompanying paper.
+% estimates. See Appendix "Implementation in MATLAB" of the accompanying
+% paper.
 nopt_simple_mle = 0;
 % Here, the user is given the option to request that the MLE optimization
 % problem for is solved for multiple initial guesses, where the initial
-% guesses are chosen in a random fashion as described in Appendix D of the
-% accompanying paper.
+% guesses are chosen in a random fashion as described in Appendix
+% "Generation of artificial data" of the accompanying paper.
 nopt_random_mle = 0;
 
 % ci_option is a K x (K+1) matrix holding zeros and ones. Setting
