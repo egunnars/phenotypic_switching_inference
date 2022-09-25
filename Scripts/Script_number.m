@@ -2,14 +2,14 @@
 
 % This is a script for cell number data without measurement error.
 
-% The script implements the statistical model (5) of Section 4.2 of the
-% accompanying paper with E_(i,l)^(num) = 0, i.e. no measurement error
-% term. The data employed is artifical and generated using the parameters
-% shown in Figure 3 of the paper.
+% The script implements the statistical model from Section "Estimation for
+% cell number data" of the accompanying paper with E_(i,l)^(num) = 0, i.e.
+% no measurement error term. The data employed is artifical and generated
+% using the parameters shown in Figure 3 of the paper.
 
 % In the script, the parameters of the branching process model from Section
-% 2 of the accompanying paper are arranged in a K x (K+1) matrix as
-% follows:
+% "Multitype branching process" of the accompanying paper are arranged in a
+% K x (K+1) matrix as follows:
 
 % 1. The first column holds the birth rates of the phenotypes, i.e. entry
 % (k,1) is the birth rate b_k of the k-th phenotype.
@@ -41,12 +41,12 @@
 
 % params_simple_num is a K x (K+1) matrix which holds the estimates for the
 % model parameters under the deterministic population model presented in
-% Appendix C of the accompanying paper. Arrangement of parameters is as
-% described above.
+% Appendix "Implementation in MATLAB" of the accompanying paper.
+% Arrangement of parameters is as described above.
  
 % params_mle_num is a K x (K+1) matrix which holds the estimates for
-% the model parameters under the statistical model (5) of Section 4.2, with
-% no measurement error term.
+% the model parameters under the statistical model from Section "Estimation
+% for cell number data", with no measurement error term.
 
 % If confidence intervals are requested, ci_num is a 2 x K x (K+1)
 % tensor, where for each i = 1,...,K and j = 1,...,K+1, ci_frac(:,i,j)
@@ -77,8 +77,9 @@ L = size(T,2);
 % replicate of the experiment started by the i-th initial condition and
 % ended at the l-th timepoint.
 % Here, we have manually entered artifical data that was simulated from the
-% branching process model of Section 2 of the accompanying paper. The
-% parameters of the model are the ones given in Figure 3 of the paper.
+% branching process model of Section "Multitype branching process model" of
+% the accompanying paper. The parameters of the model are the ones given in
+% Figure 3 of the paper.
 data_num = zeros(I,K,L,R);
 data_num(1,1,:,1) = [1340,1746,2161,3259,4017,5584];
 data_num(1,2,:,1) = [21,75,181,393,681,1426];
@@ -98,7 +99,8 @@ data_num(2,2,:,3) = [1628,2564,4115,6275,10517,15998];
 % performed on the agumented model shown in Figure 6 of the accompanying
 % paper, where a new state representing dead cells is added.
 % Note that the augmented model does not take into account clearance of
-% dead cells. See Section 7.5 of the accompanying paper.
+% dead cells. See Section "Improving identifiability of the rates of cell
+% division and cell death" of the accompanying paper.
 dead = [];
 
 % N is an I x K matrix where the i-th row contains the starting number of
@@ -108,7 +110,8 @@ N = [10^3,0;0,10^3];
 % C_num is a cell array, where C_num{i} is a K x J_i matrix which
 % allows the user to reduce the experimental data under the i-th initial
 % condition. This option can be useful for reducible switching dynamics.
-% See Appendices B and C of the accompanying paper.
+% See Appendices "Estimation for reducible switching dynamics" and
+% "Implementation in MATLAB" of the accompanying paper.
 C_num = cell(I);
 for i=1:I
     C_num{i} = eye(K,K);
@@ -160,12 +163,13 @@ x0_num_def = [];
 % guess based on simple deterministic parameter estimates. Here, the user
 % is given the option to request that the optimization problem is solved
 % for multiple initial guesses, each based on the simple deterministic
-% estimates. See Appendix C of the accompanying paper.
+% estimates. See Appendix "Implementation in MATLAB" of the accompanying
+% paper.
 nopt_simple_mle = 0;
 % Here, the user is given the option to request that the MLE optimization
 % problem for is solved for multiple initial guesses, where the initial
-% guesses are chosen in a random fashion as described in Appendix D of the
-% accompanying paper.
+% guesses are chosen in a random fashion as described in Appendix
+% "Generation of artificial data" of the accompanying paper.
 nopt_random_mle = 0;
 
 % ci_option is a K x (K+1) matrix holding zeros and ones. Setting
