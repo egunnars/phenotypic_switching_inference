@@ -1,19 +1,21 @@
 %% Background information
 
 % This is a script for cell number data without measurement error, for a
-% branching process model with reducible switching dynamics. See Appendix B
-% of the accompanying paper for a discussion of such a model.
+% branching process model with reducible switching dynamics. See Appendix
+% "Estimation for reducible switching dynamics" of the accompanying paper
+% for a discussion of such a model.
 
-% The script implements the statistical model (5) of Section 4.2 of the
-% accompanying paper with E_(i,l)^(num) = 0, i.e. no measurement error
-% term. The data is artifical and generated from the model structure shown
-% in Figure 10 of the accompanying paper. The parameters are b_1 = 0.6, b_2
-% = 1.0, b_3 = 0.8, d_1 = 0.3, d_2 = 0.5, d_3 = 0.6, nu_(12) = 0.02,
-% nu_(21) = 0.01 and nu_(23) = 0.003. All other switching rates are 0.
+% The script implements the statistical model from Section "Estimation for
+% cell number data" of the accompanying paper with E_(i,l)^(num) = 0, i.e.
+% no measurement error term. The data is artifical and generated from the
+% model structure shown in Figure 10 of the accompanying paper. The
+% parameters are b_1 = 0.6, b_2 = 1.0, b_3 = 0.8, d_1 = 0.3, d_2 = 0.5, d_3
+% = 0.6, nu_(12) = 0.02, nu_(21) = 0.01 and nu_(23) = 0.003. All other
+% switching rates are 0.
 
 % In the script, the parameters of the branching process model from Section
-% 2 of the accompanying paper are arranged in a K x (K+1) matrix as
-% follows:
+% "Multitype branching process model" of the accompanying paper are
+% arranged in a K x (K+1) matrix as follows:
 
 % 1. The first column holds the birth rates of the phenotypes, i.e. entry
 % (k,1) is the birth rate b_k of the k-th phenotype.
@@ -45,12 +47,12 @@
 
 % params_simple_num is a K x (K+1) matrix which holds the estimates for the
 % model parameters under the deterministic population model presented in
-% Appendix C of the accompanying paper. Arrangement of parameters is as
-% described above.
+% Appendix "Implementation in MATLAB" of the accompanying paper.
+% Arrangement of parameters is as described above.
  
 % params_mle_num is a K x (K+1) matrix which holds the estimates for
-% the model parameters under the statistical model (5) of Section 4.2, with
-% no measurement error term.
+% the model parameters under the statistical model from Section "Estimation
+% for cell number data", with no measurement error term.
 
 % If confidence intervals are requested, ci_num is a 2 x K x (K+1)
 % tensor, where for each i = 1,...,K and j = 1,...,K+1, ci_frac(:,i,j)
@@ -81,8 +83,9 @@ L = size(T,2);
 % replicate of the experiment started by the i-th initial condition and
 % ended at the l-th timepoint.
 % Here, we have manually entered artifical data that was simulated from the
-% branching process model of Section 2 of the accompanying paper. The
-% parameters of the model are as stated at the top of the script.
+% branching process model of Section "Multitype branching process model" of
+% the accompanying paper. The parameters of the model are as stated at the
+% top of the script.
 data_num = zeros(I,K,L,R);
 data_num(1,1,:,1) = [13206,17468,22838,30621,41498,54904];
 data_num(1,2,:,1) = [282,845,1921,3886,6874,14029];
@@ -117,7 +120,8 @@ data_num(3,3,:,3) = [12230,14764,18504,21139,27339,33157];
 % performed on the agumented model shown in Figure 6 of the accompanying
 % paper, where a new state representing dead cells is added.
 % Note that the augmented model does not take into account clearance of
-% dead cells. See Section 7.5 of the accompanying paper.
+% dead cells. See Section "Improving identifiability of the rates of cell
+% division and cell death" of the accompanying paper.
 dead = [];
 
 % N is an I x K matrix where the i-th row contains the starting number of
@@ -128,7 +132,8 @@ N = [10^4,0,0;0,10^4,0;0,0,10^4];
 % allows the user to reduce the experimental data under the i-th initial
 % condition. In this case, C_num{3} is set to be the 3rd unit column
 % vector, to account for the fact that type-3 cells do not switch over to
-% type-1 or type-2. See Appendix B of the accompanying paper.
+% type-1 or type-2. See Appendix "Estimation for reducible switching
+% dynamics" of the accompanying paper.
 C_num = cell(I);
 for i=1:I-1
     C_num{i} = eye(K,K);
@@ -173,7 +178,7 @@ Aeq_num(:,:,3) = [0,0,0,0;0,0,0,0;0,0,0,1];
 beq_num = [0;0;0];
 % In this script, the switching rates nu_(13), nu_(31) and nu_(32) are
 % constrained to be zero. To impose these constraints, the coefficients of
-% nu_(13), nu_(31) and nu_(32) in Aeq_num are set to 1 respectively, and % 
+% nu_(13), nu_(31) and nu_(32) in Aeq_num are set to 1 respectively, and 
 % beq_num is set to a three-dimensional column vector of zeros.
 
 % x0_num_def is a K x (K+1) x n tensor, which can be used to supply
@@ -186,12 +191,13 @@ x0_num_def = [];
 % guess based on simple deterministic parameter estimates. Here, the user
 % is given the option to request that the optimization problem is solved
 % for multiple initial guesses, each based on the simple deterministic
-% estimate. See Appendix C of the accompanying paper.
+% estimates. See Appendix "Implementation in MATLAB" of the accompanying
+% paper.
 nopt_simple_mle = 0;
 % Here, the user is given the option to request that the MLE optimization
 % problem for is solved for multiple initial guesses, where the initial
-% guesses are chosen in a random fashion as described in Appendix D of the
-% accompanying paper.
+% guesses are chosen in a random fashion as described in Appendix
+% "Generation of artificial data" of the accompanying paper.
 nopt_random_mle = 0;
 
 % ci_option is a K x (K+1) matrix holding zeros and ones. Setting
