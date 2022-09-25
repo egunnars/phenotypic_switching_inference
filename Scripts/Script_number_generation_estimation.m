@@ -1,13 +1,14 @@
 %% Background information
 
 % This is a script which generates parameter regimes and artificial data as
-% described in Appendix D of the accompanying paper. It then implements
-% estimation under the statistical model (5) of Section 4.2 of the paper
-% with E_(i,l)^(num) = 0, i.e. no measurement error.
+% described in Appendix "Generation of artificial data" of the accompanying
+% paper. It then implements the statistical model from Section "Estimation
+% for cell number data" of the paper with E_(i,l)^(num) = 0, i.e. no
+% measurement error.
 
 % In the script, the parameters of the branching process model from Section
-% 2 of the accompanying paper are arranged in a K x (K+1) matrix as
-% follows:
+% "Multitype branching process" of the accompanying paper are arranged in a
+% K x (K+1) matrix as follows:
 
 % 1. The first column holds the birth rates of the phenotypes, i.e. entry
 % (k,1) is the birth rate b_k of the k-th phenotype.
@@ -18,9 +19,6 @@
 % 3. The remaining columns hold the switching rates. The k-th row from the
 % third column and onwards holds the switching rates from type-k to type-m
 % in ascending order of m.
-
-% See Section 2 of the accompanying paper for an outline of the branching
-% process model and the notation used.
 
 % As an example, consider the following parameter matrix for a three-type
 % model:
@@ -42,25 +40,26 @@
 
 % params_true_num is a K x (K+1) x nregimes tensor, which holds the true
 % parameters for the artificial data. The true parameters are generated as
-% described in Appendix D of the accompanying paper. Arrangement of
-% parameters is as described above.
+% described in Appendix "Generation of artifical data" of the accompanying
+% paper. Arrangement of parameters is as described above.
 
 % data_num is an I x K x L x R x nregimes x niter tensor which holds
 % the artificial data.
 
 % params_simple_num is a K x (K+1) x nregimes x niter tensor, which holds
 % the estimates for the model parameters under the deterministic population
-% model presented in Appendix C of the accompanying paper.
+% model presented in Appendix "Implementation in MATLAB" of the
+% accompanying paper.
  
 % params_mle_num is a K x (K+1) x nregimes x niter tensor, which holds the
-% estimates for the model parameters under the statistical model (5) of
-% Section 4.2, with no measurement error term.
+% estimates for the model parameters under the statistical model from
+% Section "Estimation for cell number data", with no measurement error term.
 
 % cvs_num is a K x (K+1) x nregimes x 2 tensor. cvs_num(i,j,n,1) holds the
 % coefficient of variation (CV) for the simple deterministic estimates of
 % parameter (i,j) under parameter regime n. cvs_num(i,j,n,2) holds the CV
-% for the estimates of parameter (i,j) under the statistical model (5) of
-% Section 4.2.
+% for the estimates of parameter (i,j) under the statistical model from
+% Section "Estimation for cell number data".
 
 %% Input parameters
 
@@ -85,17 +84,19 @@ nregimes = 2;
 niter = 10;
 
 % If time_lapse = 0, the data is generated as endpoint data. If timelapse =
-% 1, the data is generated as sequential data. See Section 3 of the
-% accompanying paper.
+% 1, the data is generated as sequential data. See Section "Expmeriments
+% and data" of the accompanying paper.
 time_lapse = 0;
 % If dead_option = 1, the number of dead cells at each time point is used
-% in the parameter estimation. See Section 7.5 of the accompanying paper.
+% in the parameter estimation. See Section "Improving identifiability of
+% the rates of cell division and cell death" of the accompanying paper.
 dead_option = 0;
 
 % C_num is a cell array, where C_num{i} is a K x J_i matrix which
 % allows the user to reduce the experimental data under the i-th initial
 % condition. This option can be useful for reducible switching dynamics.
-% See Appendices B and C in the accompanying paper.
+% See Appendices "Estimation for reducible switching dynamics" and
+% "Implementation in MATLAB" of the accompanying paper.
 C_num = cell(I);
 for i=1:I
     C_num{i} = eye(K,K);
@@ -141,12 +142,13 @@ beq_num = [];
 % guess based on simple deterministic parameter estimates. Here, the user
 % is given the option to request that the optimization problem is solved
 % for multiple initial guesses, each based on the simple deterministic
-% estimates. See Appendix C of the accompanying paper.
+% estimates. See Appendix "Implementation in MATLAB" of the accompanying
+% paper.
 nopt_simple_mle = 0;
 % Here, the user is given the option to request that the MLE optimization
 % problem for is solved for multiple initial guesses, where the initial
-% guesses are chosen in a random fashion as described in Appendix D of the
-% accompanying paper.
+% guesses are chosen in a random fashion as described in Appendix
+% "Generation of artificial data" of the accompanying paper.
 nopt_random_mle = 0;
 
 %% Setup of data structures
