@@ -6,9 +6,9 @@ The repository includes background codes and six example script files which demo
 
 The script files are the following:
 
-1.	"Script_number" implements estimation for cell number data under the statistical model from section “Estimation for cell number data” of the accompanying paper with E_(i,l)^(num) = 0, i.e. no measurement error term.
+1.	"Script_number" implements estimation for cell number data under the statistical model from Section “Estimation for cell number data” of the accompanying paper with E_(i,l)^(num) = 0, i.e. no measurement error term.
 
-2.	"Script_number_reducible" implements estimation for cell number data under the statistical model from section “Estimation for cell number data” of the accompanying paper with E_(i,l)^(num) = 0, i.e. no measurement error term, for a model with reducible switching dynamics. The model structure is displayed in Figure 10 of Appendix “Estimation for reducible switching dynamics”.
+2.	"Script_number_reducible" implements estimation for cell number data under the statistical model from Section “Estimation for cell number data” of the accompanying paper with E_(i,l)^(num) = 0, i.e. no measurement error term, for a model with reducible switching dynamics. The model structure is displayed in Figure 10 of Appendix “Estimation for reducible switching dynamics”.
 
 3.	"Script_fractional_Model_I" implements estimation for cell fraction data under Model I from Section “Application: Transition between stem and non-stem cell states in SW620 colon cancer” of the accompanying paper.
 
